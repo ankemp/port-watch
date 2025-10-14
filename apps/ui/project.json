@@ -17,10 +17,19 @@
         "assets": [
           {
             "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          },
+          {
+            "glob": "**/*",
             "input": "apps/ui/public"
           }
         ],
-        "styles": ["apps/ui/src/styles.css"]
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
+          "apps/ui/src/styles.css"
+        ]
       },
       "configurations": {
         "production": {
