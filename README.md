@@ -1,82 +1,89 @@
-# PortWatch
+# **Port Watch**
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A modern, multi-host Docker management UI with a focus on security and team-based access control.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## **Table of Contents**
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- [Introduction](#introduction)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+- [Configuration](#configuration)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Finish your CI setup
+## **Introduction**
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/3OohSm4kGt)
+Port Watch is a web-based user interface designed to manage multiple Docker instances from a single, centralized platform. Whether your Docker hosts are on your local machine, on your network via a TCP proxy, or on a remote server accessible via SSH, Port Watch provides the tools to manage them.
 
+The core philosophy of Port Watch is to provide powerful Docker management capabilities while enforcing security through a robust Role-Based Access Control (RBAC) system. Administrators can grant granular permissions to users, ensuring they only have access to the specific containers and hosts they are authorized to manage.
 
-## Run tasks
+## **Key Features**
 
-To run the dev server for your app, use:
+- **Multi-Host Management**: Connect to and manage Docker daemons via local socket, TCP proxy, or SSH.
+- **Container Lifecycle Management**: Start, stop, restart, and delete containers. View detailed information, including labels, ports, volumes, and environment variables.
+- **Real-time Log Streaming**: Stream logs directly from your containers to the UI in real-time.
+- **Image Management**: Pull new images from public or private registries, and clean up your hosts by deleting or pruning unused images.
+- **Role-Based Access Control (RBAC)**: A comprehensive user management system with Admin and User roles. Admins can assign specific permissions (View, Manage, Logs, Delete) for each container to individual users.
+- **System-Wide Audit Trail**: Keep track of critical actions performed within the system. Admins can view a complete log of events like user logins, container actions, and host modifications.
+- **Read-Only Network & Volume Views**: Inspect Docker networks and volumes on your hosts.
 
-```sh
-npx nx serve ui
-```
+## **Screenshots**
 
-To create a production bundle:
+A screenshot of the main container list.  
+A screenshot of the container details view.  
+A screenshot of the user management panel.
 
-```sh
-npx nx build ui
-```
+## **Tech Stack**
 
-To see all available targets to run for a project, run:
+Port Watch is built with a modern, robust, and scalable tech stack.
 
-```sh
-npx nx show project ui
-```
+| Component               | Technology          |
+| :---------------------- | :------------------ |
+| **Monorepo Management** | Nx                  |
+| **Frontend Framework**  | Angular             |
+| **Backend Framework**   | NestJS (TypeScript) |
+| **Database**            | SQLite / PostgreSQL |
+| **Authentication**      | JWT                 |
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## **Getting Started**
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Follow these instructions to get Port Watch up and running on your local machine for development and testing purposes.
 
-## Add new projects
+### **Prerequisites**
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+- [Node.js](https://nodejs.org/) (v18 or later)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com/get-started)
 
-Use the plugin's generator to create new projects.
+## **Configuration**
 
-To generate a new application, use:
+Port Watch is designed to be easy to run out-of-the-box, but also configurable for production environments.
 
-```sh
-npx nx g @nx/angular:app demo
-```
+### **Database**
 
-To generate a new library, use:
+By default, the application uses a local **SQLite** database, which requires no configuration. The database file will be automatically created in the project directory.
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+For production deployments, you can switch to **PostgreSQL** by setting the following environment variables. You can create a .env file in the root of the project to manage these.
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+## **Roadmap**
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+We have many exciting features planned for future versions of Port Watch. Here's a look at what's potentially on the horizon:
 
+- **Docker Compose Management**: Link Git repositories to discover and deploy Docker Compose stacks directly from the UI.
+- **Dashboard View**: A high-level overview of all connected hosts and their status.
+- **User Notifications**: In-app, email, and webhook notifications for important events (e.g., container crashes).
+- **Docker Swarm & Kubernetes Support**: Expand management capabilities to include container orchestrators.
+- **Advanced Network & Volume Management**: Add functionality to create and manage networks and volumes.
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## **Contributing**
 
-## Install Nx Console
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+Please read our CONTRIBUTING.md file for details on our code of conduct and the process for submitting pull requests.
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## **License**
 
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
