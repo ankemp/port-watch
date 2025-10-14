@@ -57,7 +57,11 @@
           "buildTarget": "ui:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "dependsOn": ["api:serve"],
+      "options": {
+        "proxyConfig": "apps/ui/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
