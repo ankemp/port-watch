@@ -1,0 +1,22 @@
+# Example hosts.yaml
+# Define Docker hosts for the application to manage.
+# This file is loaded at application startup.
+
+hosts:
+  - name: local-docker
+    connectionType: DOCKER_SOCKET
+    dockerSocketPath: /var/run/docker.sock
+
+  - name: remote-tcp
+    connectionType: TCP_TLS
+    host: 192.168.1.100
+    port: 2376
+    # tlsCertPath: /path/to/cert.pem
+    # tlsKeyPath: /path/to/key.pem
+
+  - name: remote-ssh
+    connectionType: SSH
+    host: 192.168.1.101
+    port: 22
+    user: dockeradmin
+    # privateKeyPath: /path/to/id_rsa

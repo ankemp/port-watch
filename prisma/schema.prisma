@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================
+// Enums (v1 scope)
+// ==========================
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum HostConnectionType {
+  DOCKER_SOCKET
+  SSH
+  TCP_TLS
+}
+
+enum PermissionType {
+  OWNER
+  ADMIN
+  WRITE
+  READ
+}
+
+enum AuditEventType {
+  USER_LOGIN
+  USER_LOGOUT
+  USER_CREATED
+  USER_DELETED
+  HOST_ADDED
+  HOST_UPDATED
+  HOST_REMOVED
+  CONTAINER_STARTED
+  CONTAINER_STOPPED
+  CONTAINER_REMOVED
+}
+
+
+// ==========================
+// Models (v1 scope)
+// ==========================
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         UserRole @default(USER)
+
+  // Relations
+  permissions Permission[]
+  auditLogs   AuditLog[]
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Permission {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Resource targeting (flexible for host/container/etc.)
+  resourceType String
+  resourceId   String
+  type         PermissionType
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, resourceType, resourceId])
+  @@index([userId])
+}
+
+model AuditLog {
+  id     String  @id @default(cuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  eventType  AuditEventType
+  entityType String // e.g., 'host' | 'container' | 'user'
+  entityId   String // ID relevant to the entityType
+  details    Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([eventType])
+  @@index([createdAt])
+}

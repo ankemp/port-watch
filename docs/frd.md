@@ -1,8 +1,5 @@
 # **Functional Requirements Document: Docker Management UI**
 
-Version: 1.3  
-Date: October 13, 2025
-
 ## **1\. Introduction**
 
 ### **1.1. Project Overview**
@@ -21,11 +18,11 @@ The project will deliver a complete web application consisting of an Angular fro
 - Real-time container log streaming.
 - Read-only viewing of networks and volumes.
 - RBAC for restricting access to specific Docker resources.
-- Management of Docker Compose stacks from Git repositories.
 - System-wide audit trail for key actions.
 
-**Out-of-Scope for Version 1.3:**
+**Out-of-Scope for Initial Version**
 
+- Management of Docker Compose stacks from Git repositories.
 - Docker Swarm or Kubernetes management.
 - Advanced network or volume management (e.g., creating/deleting unattached resources).
 - Automated updates for deployed Docker Compose stacks from Git.

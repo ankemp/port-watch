@@ -9,6 +9,4 @@ import { TuiRoot } from '@taiga-ui/core';
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App {
-  protected title = 'ui';
-}
+export class App {}

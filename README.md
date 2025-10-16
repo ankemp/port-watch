@@ -10,6 +10,8 @@ A modern, multi-host Docker management UI with a focus on security and team-base
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
 - [Configuration](#configuration)
+  - [Database](#database)
+  - [Host Configuration](#host-configuration)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -67,6 +69,28 @@ Port Watch is designed to be easy to run out-of-the-box, but also configurable f
 By default, the application uses a local **SQLite** database, which requires no configuration. The database file will be automatically created in the project directory.
 
 For production deployments, you can switch to **PostgreSQL** by setting the following environment variables. You can create a .env file in the root of the project to manage these.
+
+### **Host Configuration**
+
+Docker hosts are defined in a YAML config file (`hosts.yaml`) at the project root. This file is loaded at application startup. No host data is stored in the database.
+
+Example:
+
+```yaml
+hosts:
+  - name: local-docker
+    connectionType: DOCKER_SOCKET
+    dockerSocketPath: /var/run/docker.sock
+  - name: remote-tcp
+    connectionType: TCP_TLS
+    host: 192.168.1.100
+    port: 2376
+  - name: remote-ssh
+    connectionType: SSH
+    host: 192.168.1.101
+    port: 22
+    user: dockeradmin
+```
 
 ## **Roadmap**
 
